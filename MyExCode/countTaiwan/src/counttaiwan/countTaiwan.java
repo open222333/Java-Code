@@ -1,62 +1,64 @@
-package counttaiwan;
+package countTaiwan.src.counttaiwan;
+
+// package counttaiwan;
 
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.text.*;
+// import java.text.*;
 
 //繼承JFrame 表示他就是一個視窗物件
 public class countTaiwan extends JFrame implements ActionListener, ItemListener {
 
-    //currency 貨幣單位
+    // currency 貨幣單位
     String money_unit_TWD = "TWD";
     String money_unit_UAD = "UAD";
     int frame_width = 1500;
     int frame_height = 900;
 
     JFrame frame;
-    //一般-散貨
+    // 一般-散貨
     JLabel lb_BulkCargoCBM, lb_BulkCargoQuality;
     JTextField tf_BulkCargoCBM, tf_BulkCargoQuality;
     JButton bt_BulkCargoSumbit, bt_BulkCargoClear;
     JTextArea jta_BulkCargoResult;
 
-    //一般-整櫃
+    // 一般-整櫃
     JLabel lb_commonBigContainer, lb_commonSmallContainer;
     JTextField tf_commonBigContainer, tf_commonSmallContainer;
     JButton bt_commonContainerSumbit, bt_commonContainerClear;
     JTextArea jta_commonContainerResult;
 
-    //一般-散貨櫃
+    // 一般-散貨櫃
     JLabel lb_commonContainerCBM, lb_commonContainerQuality;
     JTextField tf_commonContainerCBM, tf_commonContainerQuality;
 
-    //危險櫃
+    // 危險櫃
     JLabel lb_dangerBigContainer, lb_dangerSmallContainer;
     JTextField tf_dangerBigContainer, tf_dangerSmallContainer;
     JButton bt_dangerContainerSumbit, bt_dangerContainerClear;
     JTextArea jta_dangerContainerResult;
 
-    //危險-散貨櫃
+    // 危險-散貨櫃
     JLabel lb_dangerContainerCBM, lb_dangerContainerQuality;
     JTextField tf_dangerContainerCBM, tf_dangerContainerQuality;
 
-    //通用
+    // 通用
     JLabel lb_commonBulkCargo = new JLabel("一般-散貨");
     JLabel lb_commonContainer = new JLabel("一般-整櫃");
     JLabel lb_dangerContainer = new JLabel("危險櫃");
 
-    //散貨櫃
+    // 散貨櫃
     JLabel lb_iscommonBulkContainers, lb_isdangerBulkContainers;
     JCheckBox jc_iscommonBulkContainers, jc_isdangerBulkContainers;
 
-    //固定費
+    // 固定費
     JLabel lb_iscommonContainerFixedFee, lb_isdangerContainerFixedFee;
     JCheckBox jc_iscommonContainerFixedFee, jc_isdangerContainerFixedFee;
 
     /*
-     OF:海運費 CHF:吊櫃費 BOLPF:提單製作費 SF:封條費 EDF:電放費
-     CFS:併櫃費 FF:固定費 EDC:出口報關費 EDT:出口報單傳輸費 CYEUF:貨櫃場機具使用費
+     * OF:海運費 CHF:吊櫃費 BOLPF:提單製作費 SF:封條費 EDF:電放費
+     * CFS:併櫃費 FF:固定費 EDC:出口報關費 EDT:出口報單傳輸費 CYEUF:貨櫃場機具使用費
      */
     int int_EDC, int_CBM;
     int int_OF_big, int_OF_small, int_CHF_big, int_CHF_small;
@@ -76,7 +78,7 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
         frame.setVisible(true);
     }
 
-    //視窗內容
+    // 視窗內容
     public Container createConten() {
         Container contenPane = new Container();
         contenPane.setLayout(null);
@@ -217,15 +219,15 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
 
     }
 
-    //設定格式
-//    private void setUpFormats(){
-//        numberFormat = NumberFormat.getNumberInstance();
-//    }
-    //螢幕中央
+    // 設定格式
+    // private void setUpFormats(){
+    // numberFormat = NumberFormat.getNumberInstance();
+    // }
+    // 螢幕中央
     public void centerFrame() {
         int x, y, screen_width, screen_height;
 
-        //取得螢幕大小
+        // 取得螢幕大小
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         screen_width = screenSize.width;
@@ -243,11 +245,11 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
         if (button == bt_BulkCargoSumbit) {
 
             int_CBM = 26;
-            int_BOLPF = 550; //提單製作費
-            int_CFS = 380; //併櫃費(裝櫃費)
-            int_CYEUF = 55; //貨櫃場機具使用費
-            int_EDC = 1200; //出口報關費
-            int_EDT = 200; //出口報單傳輸費
+            int_BOLPF = 550; // 提單製作費
+            int_CFS = 380; // 併櫃費(裝櫃費)
+            int_CYEUF = 55; // 貨櫃場機具使用費
+            int_EDC = 1200; // 出口報關費
+            int_EDT = 200; // 出口報單傳輸費
 
             int cbm = Integer.parseInt(tf_BulkCargoCBM.getText());
             int quality = Integer.parseInt(tf_BulkCargoQuality.getText());
@@ -275,7 +277,8 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
             s += "=================總和=================\n";
             s += cbm * int_CBM + " " + money_unit_UAD + " \n"
                     + (cbm * int_CFS + cbm * int_CYEUF + quality * int_EDC + quality * int_EDT
-                    + quality * int_BOLPF) + " " + money_unit_TWD;
+                            + quality * int_BOLPF)
+                    + " " + money_unit_TWD;
 
             jta_BulkCargoResult.setText(s);
         }
@@ -285,23 +288,23 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
             jta_BulkCargoResult.setText("");
         }
         if (button == bt_commonContainerSumbit) {
-            int_OF_big = 80; //海運費(大櫃)
-            int_OF_small = 40; //海運費(小櫃)
-            int_CHF_big = 7000; //吊櫃費(大櫃)
-            int_CHF_small = 5600; //吊櫃費(小櫃)
-            int_CFS = 180; //併櫃費(裝櫃費)
-            int_SF = 200; //封條費
-            int_EDF = 600; //電放費
-            //固定費
+            int_OF_big = 80; // 海運費(大櫃)
+            int_OF_small = 40; // 海運費(小櫃)
+            int_CHF_big = 7000; // 吊櫃費(大櫃)
+            int_CHF_small = 5600; // 吊櫃費(小櫃)
+            int_CFS = 180; // 併櫃費(裝櫃費)
+            int_SF = 200; // 封條費
+            int_EDF = 600; // 電放費
+            // 固定費
             if (jc_iscommonContainerFixedFee.isSelected()) {
                 int_FF = 1000;
             } else {
                 int_FF = 0;
             }
-            int_BOLPF = 1600; //提單製作費
-            int_CYEUF = 55; //貨櫃場機具使用費
-            int_EDC = 1200; //出口報關費
-            int_EDT = 200; //出口報單傳輸費
+            int_BOLPF = 1600; // 提單製作費
+            int_CYEUF = 55; // 貨櫃場機具使用費
+            int_EDC = 1200; // 出口報關費
+            int_EDT = 200; // 出口報單傳輸費
 
             int big = Integer.parseInt(tf_commonBigContainer.getText());
             int small = Integer.parseInt(tf_commonSmallContainer.getText());
@@ -309,11 +312,14 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
             int quality = Integer.parseInt(tf_commonContainerQuality.getText());
 
             if (jc_iscommonBulkContainers.isSelected()) {
-                //散貨併櫃
-                String s = lb_commonBigContainer.getText() + "數量: " + tf_commonBigContainer.getText() + "          |||          ";
+                // 散貨併櫃
+                String s = lb_commonBigContainer.getText() + "數量: " + tf_commonBigContainer.getText()
+                        + "          |||          ";
                 s += lb_commonContainerCBM.getText() + "數量: " + tf_commonContainerCBM.getText() + "\n";
-                s += lb_commonSmallContainer.getText() + "數量: " + tf_commonSmallContainer.getText() + "          |||          ";
-                s += lb_commonContainerQuality.getText() + ": " + tf_commonContainerQuality.getText() + "\n";
+                s += lb_commonSmallContainer.getText() + "數量: " + tf_commonSmallContainer.getText()
+                        + "          |||          ";
+                s += lb_commonContainerQuality.getText() + ": " + tf_commonContainerQuality.getText()
+                        + "\n";
                 s += "=================海運費=================\n";
                 s += tf_commonBigContainer.getText() + " (大櫃數量) * " + int_OF_big + " (海運費-大櫃) = "
                         + big * int_OF_big + " " + money_unit_UAD + "\n";
@@ -327,15 +333,18 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
                 s += "=================提單製作費=================\n";
                 s += "(" + tf_commonBigContainer.getText() + " (大櫃數量) + "
                         + tf_commonSmallContainer.getText() + " (小櫃數量)) * "
-                        + int_BOLPF + "(提單製作費) = " + ((big + small) * int_BOLPF) + " " + money_unit_TWD + "\n";
+                        + int_BOLPF + "(提單製作費) = " + ((big + small) * int_BOLPF) + " "
+                        + money_unit_TWD + "\n";
                 s += "=================封條費=================\n";
                 s += "(" + tf_commonBigContainer.getText() + " (大櫃數量) + "
                         + tf_commonSmallContainer.getText() + " (小櫃數量)) * "
-                        + int_SF + "(封條費) = " + ((big + small) * int_SF) + " " + money_unit_TWD + "\n";
+                        + int_SF + "(封條費) = " + ((big + small) * int_SF) + " " + money_unit_TWD
+                        + "\n";
                 s += "=================電放費=================\n";
                 s += "(" + tf_commonBigContainer.getText() + " (大櫃數量) + "
                         + tf_commonSmallContainer.getText() + " (小櫃數量)) * "
-                        + int_EDF + "(電放費) = " + ((big + small) * int_EDF) + " " + money_unit_TWD + "\n";
+                        + int_EDF + "(電放費) = " + ((big + small) * int_EDF) + " "
+                        + money_unit_TWD + "\n";
                 s += "=================併櫃費=================\n";
                 s += tf_commonContainerCBM.getText() + " (CBM數量) * " + int_CFS + " (併櫃費) = "
                         + cbm * int_CFS + " " + money_unit_TWD + "\n";
@@ -352,15 +361,19 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
                 s += int_FF + " " + money_unit_TWD + "\n";
                 s += "=================總和=================\n";
                 s += (big * int_OF_big + small * int_OF_small) + " " + money_unit_UAD + "\n";
-                s += (big * int_CHF_big + small * int_CHF_small + ((big + small) * int_BOLPF) + ((big + small) * int_SF)
-                        + ((big + small) * int_EDF) + cbm * int_CFS + cbm * int_CYEUF + quality * int_EDC + quality * int_EDT + int_FF)
+                s += (big * int_CHF_big + small * int_CHF_small + ((big + small) * int_BOLPF)
+                        + ((big + small) * int_SF)
+                        + ((big + small) * int_EDF) + cbm * int_CFS + cbm * int_CYEUF
+                        + quality * int_EDC + quality * int_EDT + int_FF)
                         + " " + money_unit_TWD + "\n";
 
                 jta_commonContainerResult.setText(s);
             } else {
-                //非散貨併櫃
-                String s = lb_commonBigContainer.getText() + "數量: " + tf_commonBigContainer.getText() + "\n";
-                s += lb_commonSmallContainer.getText() + "數量: " + tf_commonSmallContainer.getText() + "\n";
+                // 非散貨併櫃
+                String s = lb_commonBigContainer.getText() + "數量: " + tf_commonBigContainer.getText()
+                        + "\n";
+                s += lb_commonSmallContainer.getText() + "數量: " + tf_commonSmallContainer.getText()
+                        + "\n";
                 s += "=================海運費=================\n";
                 s += tf_commonBigContainer.getText() + " (大櫃數量) * " + int_OF_big + " (海運費-大櫃) = "
                         + big * int_OF_big + " " + money_unit_UAD + "\n";
@@ -374,29 +387,36 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
                 s += "=================提單製作費=================\n";
                 s += "(" + tf_commonBigContainer.getText() + " (大櫃數量) + "
                         + tf_commonSmallContainer.getText() + " (小櫃數量)) * "
-                        + int_BOLPF + "(提單製作費) = " + ((big + small) * int_BOLPF) + " " + money_unit_TWD + "\n";
+                        + int_BOLPF + "(提單製作費) = " + ((big + small) * int_BOLPF) + " "
+                        + money_unit_TWD + "\n";
                 s += "=================封條費=================\n";
                 s += "(" + tf_commonBigContainer.getText() + " (大櫃數量) + "
                         + tf_commonSmallContainer.getText() + " (小櫃數量)) * "
-                        + int_SF + "(封條費) = " + ((big + small) * int_SF) + " " + money_unit_TWD + "\n";
+                        + int_SF + "(封條費) = " + ((big + small) * int_SF) + " " + money_unit_TWD
+                        + "\n";
                 s += "=================電放費=================\n";
                 s += "(" + tf_commonBigContainer.getText() + " (大櫃數量) + "
                         + tf_commonSmallContainer.getText() + " (小櫃數量)) * "
-                        + int_EDF + "(電放費) = " + ((big + small) * int_EDF) + " " + money_unit_TWD + "\n";
+                        + int_EDF + "(電放費) = " + ((big + small) * int_EDF) + " "
+                        + money_unit_TWD + "\n";
                 s += "=================固定費=================\n";
                 s += int_FF + " " + money_unit_TWD + "\n";
                 s += "=================出口報關費=================\n";
                 s += "(" + tf_commonBigContainer.getText() + " (大櫃數量) + "
-                        + tf_commonSmallContainer.getText() + " (小櫃數量)) * " + int_EDC + " (出口報關費) = "
+                        + tf_commonSmallContainer.getText() + " (小櫃數量)) * " + int_EDC
+                        + " (出口報關費) = "
                         + ((big + small) * int_EDC) + " " + money_unit_TWD + "\n";
                 s += "=================出口報單傳輸費=================\n";
                 s += "(" + tf_commonBigContainer.getText() + " (大櫃數量) + "
-                        + tf_commonSmallContainer.getText() + " (小櫃數量)) * " + int_EDT + " (出口報單傳輸費) = "
+                        + tf_commonSmallContainer.getText() + " (小櫃數量)) * " + int_EDT
+                        + " (出口報單傳輸費) = "
                         + ((big + small) * int_EDT) + " " + money_unit_TWD + "\n";
                 s += "=================總和=================\n";
                 s += (big * int_OF_big + small * int_OF_small) + " " + money_unit_UAD + "\n";
-                s += (big * int_CHF_big + small * int_CHF_small + ((big + small) * int_BOLPF) + ((big + small) * int_SF)
-                        + ((big + small) * int_EDF) + cbm * int_CFS + ((big + small) * int_EDC) + ((big + small) * int_EDT) + int_FF)
+                s += (big * int_CHF_big + small * int_CHF_small + ((big + small) * int_BOLPF)
+                        + ((big + small) * int_SF)
+                        + ((big + small) * int_EDF) + cbm * int_CFS + ((big + small) * int_EDC)
+                        + ((big + small) * int_EDT) + int_FF)
                         + " " + money_unit_TWD + "\n";
 
                 jta_commonContainerResult.setText(s);
@@ -411,23 +431,23 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
             jta_commonContainerResult.setText("");
         }
         if (button == bt_dangerContainerSumbit) {
-            int_OF_big = 210; //海運費(大櫃)
-            int_OF_small = 130; //海運費(小櫃)
-            int_CHF_big = 7000; //吊櫃費(大櫃)
-            int_CHF_small = 5600; //吊櫃費(小櫃)
-            int_CFS = 250; //併櫃費(裝櫃費)
-            int_SF = 200; //封條費
-            int_EDF = 600; //電放費
-            //固定費
+            int_OF_big = 210; // 海運費(大櫃)
+            int_OF_small = 130; // 海運費(小櫃)
+            int_CHF_big = 7000; // 吊櫃費(大櫃)
+            int_CHF_small = 5600; // 吊櫃費(小櫃)
+            int_CFS = 250; // 併櫃費(裝櫃費)
+            int_SF = 200; // 封條費
+            int_EDF = 600; // 電放費
+            // 固定費
             if (jc_isdangerContainerFixedFee.isSelected()) {
                 int_FF = 1000;
             } else {
                 int_FF = 0;
             }
-            int_BOLPF = 1600; //提單製作費
-            int_CYEUF = 55; //貨櫃場機具使用費
-            int_EDC = 1200; //出口報關費
-            int_EDT = 200; //出口報單傳輸費
+            int_BOLPF = 1600; // 提單製作費
+            int_CYEUF = 55; // 貨櫃場機具使用費
+            int_EDC = 1200; // 出口報關費
+            int_EDT = 200; // 出口報單傳輸費
 
             int big = Integer.parseInt(tf_dangerBigContainer.getText());
             int small = Integer.parseInt(tf_dangerSmallContainer.getText());
@@ -435,11 +455,14 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
             int quality = Integer.parseInt(tf_dangerContainerQuality.getText());
 
             if (jc_isdangerBulkContainers.isSelected()) {
-                //散貨併櫃
-                String s = lb_dangerBigContainer.getText() + "數量: " + tf_dangerBigContainer.getText() + "          |||          ";
+                // 散貨併櫃
+                String s = lb_dangerBigContainer.getText() + "數量: " + tf_dangerBigContainer.getText()
+                        + "          |||          ";
                 s += lb_dangerContainerCBM.getText() + "數量: " + tf_dangerContainerCBM.getText() + "\n";
-                s += lb_dangerSmallContainer.getText() + "數量: " + tf_dangerSmallContainer.getText() + "          |||          ";
-                s += lb_dangerContainerQuality.getText() + ": " + tf_dangerContainerQuality.getText() + "\n";
+                s += lb_dangerSmallContainer.getText() + "數量: " + tf_dangerSmallContainer.getText()
+                        + "          |||          ";
+                s += lb_dangerContainerQuality.getText() + ": " + tf_dangerContainerQuality.getText()
+                        + "\n";
                 s += "=================海運費=================\n";
                 s += tf_dangerBigContainer.getText() + " (大櫃數量) * " + int_OF_big + " (海運費-大櫃) = "
                         + big * int_OF_big + " " + money_unit_UAD + "\n";
@@ -453,15 +476,18 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
                 s += "=================提單製作費=================\n";
                 s += "(" + tf_dangerBigContainer.getText() + " (大櫃數量) + "
                         + tf_dangerSmallContainer.getText() + " (小櫃數量)) * "
-                        + int_BOLPF + "(提單製作費) = " + ((big + small) * int_BOLPF) + " " + money_unit_TWD + "\n";
+                        + int_BOLPF + "(提單製作費) = " + ((big + small) * int_BOLPF) + " "
+                        + money_unit_TWD + "\n";
                 s += "=================封條費=================\n";
                 s += "(" + tf_dangerBigContainer.getText() + " (大櫃數量) + "
                         + tf_dangerSmallContainer.getText() + " (小櫃數量)) * "
-                        + int_SF + "(封條費) = " + ((big + small) * int_SF) + " " + money_unit_TWD + "\n";
+                        + int_SF + "(封條費) = " + ((big + small) * int_SF) + " " + money_unit_TWD
+                        + "\n";
                 s += "=================電放費=================\n";
                 s += "(" + tf_dangerBigContainer.getText() + " (大櫃數量) + "
                         + tf_dangerSmallContainer.getText() + " (小櫃數量)) * "
-                        + int_EDF + "(電放費) = " + ((big + small) * int_EDF) + " " + money_unit_TWD + "\n";
+                        + int_EDF + "(電放費) = " + ((big + small) * int_EDF) + " "
+                        + money_unit_TWD + "\n";
                 s += "=================併櫃費=================\n";
                 s += tf_dangerContainerCBM.getText() + " (CBM數量) * " + int_CFS + " (併櫃費) = "
                         + cbm * int_CFS + " " + money_unit_TWD + "\n";
@@ -478,15 +504,19 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
                 s += int_FF + " " + money_unit_TWD + "\n";
                 s += "=================總和=================\n";
                 s += (big * int_OF_big + small * int_OF_small) + " " + money_unit_UAD + "\n";
-                s += (big * int_CHF_big + small * int_CHF_small + ((big + small) * int_BOLPF) + ((big + small) * int_SF)
-                        + ((big + small) * int_EDF) + cbm * int_CFS + cbm * int_CYEUF + quality * int_EDC + quality * int_EDT + int_FF)
+                s += (big * int_CHF_big + small * int_CHF_small + ((big + small) * int_BOLPF)
+                        + ((big + small) * int_SF)
+                        + ((big + small) * int_EDF) + cbm * int_CFS + cbm * int_CYEUF
+                        + quality * int_EDC + quality * int_EDT + int_FF)
                         + " " + money_unit_TWD + "\n";
 
                 jta_dangerContainerResult.setText(s);
             } else {
-                //非散貨併櫃
-                String s = lb_dangerBigContainer.getText() + "數量: " + tf_dangerBigContainer.getText() + "\n";
-                s += lb_dangerSmallContainer.getText() + "數量: " + tf_dangerSmallContainer.getText() + "\n";
+                // 非散貨併櫃
+                String s = lb_dangerBigContainer.getText() + "數量: " + tf_dangerBigContainer.getText()
+                        + "\n";
+                s += lb_dangerSmallContainer.getText() + "數量: " + tf_dangerSmallContainer.getText()
+                        + "\n";
                 s += "=================海運費=================\n";
                 s += tf_dangerBigContainer.getText() + " (大櫃數量) * " + int_OF_big + " (海運費-大櫃) = "
                         + big * int_OF_big + " " + money_unit_UAD + "\n";
@@ -500,29 +530,36 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
                 s += "=================提單製作費=================\n";
                 s += "(" + tf_dangerBigContainer.getText() + " (大櫃數量) + "
                         + tf_dangerSmallContainer.getText() + " (小櫃數量)) * "
-                        + int_BOLPF + "(提單製作費) = " + ((big + small) * int_BOLPF) + " " + money_unit_TWD + "\n";
+                        + int_BOLPF + "(提單製作費) = " + ((big + small) * int_BOLPF) + " "
+                        + money_unit_TWD + "\n";
                 s += "=================封條費=================\n";
                 s += "(" + tf_dangerBigContainer.getText() + " (大櫃數量) + "
                         + tf_dangerSmallContainer.getText() + " (小櫃數量)) * "
-                        + int_SF + "(封條費) = " + ((big + small) * int_SF) + " " + money_unit_TWD + "\n";
+                        + int_SF + "(封條費) = " + ((big + small) * int_SF) + " " + money_unit_TWD
+                        + "\n";
                 s += "=================電放費=================\n";
                 s += "(" + tf_dangerBigContainer.getText() + " (大櫃數量) + "
                         + tf_dangerSmallContainer.getText() + " (小櫃數量)) * "
-                        + int_EDF + "(電放費) = " + ((big + small) * int_EDF) + " " + money_unit_TWD + "\n";
+                        + int_EDF + "(電放費) = " + ((big + small) * int_EDF) + " "
+                        + money_unit_TWD + "\n";
                 s += "=================固定費=================\n";
                 s += int_FF + " " + money_unit_TWD + "\n";
                 s += "=================出口報關費=================\n";
                 s += "(" + tf_dangerBigContainer.getText() + " (大櫃數量) + "
-                        + tf_dangerSmallContainer.getText() + " (小櫃數量)) * " + int_EDC + " (出口報關費) = "
+                        + tf_dangerSmallContainer.getText() + " (小櫃數量)) * " + int_EDC
+                        + " (出口報關費) = "
                         + ((big + small) * int_EDC) + " " + money_unit_TWD + "\n";
                 s += "=================出口報單傳輸費=================\n";
                 s += "(" + tf_dangerBigContainer.getText() + " (大櫃數量) + "
-                        + tf_dangerSmallContainer.getText() + " (小櫃數量)) * " + int_EDT + " (出口報單傳輸費) = "
+                        + tf_dangerSmallContainer.getText() + " (小櫃數量)) * " + int_EDT
+                        + " (出口報單傳輸費) = "
                         + ((big + small) * int_EDT) + " " + money_unit_TWD + "\n";
                 s += "=================總和=================\n";
                 s += (big * int_OF_big + small * int_OF_small) + " " + money_unit_UAD + "\n";
-                s += (big * int_CHF_big + small * int_CHF_small + ((big + small) * int_BOLPF) + ((big + small) * int_SF)
-                        + ((big + small) * int_EDF) + cbm * int_CFS + ((big + small) * int_EDC) + ((big + small) * int_EDT) + int_FF)
+                s += (big * int_CHF_big + small * int_CHF_small + ((big + small) * int_BOLPF)
+                        + ((big + small) * int_SF)
+                        + ((big + small) * int_EDF) + cbm * int_CFS + ((big + small) * int_EDC)
+                        + ((big + small) * int_EDT) + int_FF)
                         + " " + money_unit_TWD + "\n";
 
                 jta_dangerContainerResult.setText(s);
@@ -540,18 +577,18 @@ public class countTaiwan extends JFrame implements ActionListener, ItemListener 
 
     public void itemStateChanged(ItemEvent ie) {
         if (jc_iscommonBulkContainers.isSelected()) {
-                tf_commonContainerCBM.setEditable(true);
-                tf_commonContainerQuality.setEditable(true);
-            } else {
-                tf_commonContainerCBM.setEditable(false);
-                tf_commonContainerQuality.setEditable(false);
-            }
+            tf_commonContainerCBM.setEditable(true);
+            tf_commonContainerQuality.setEditable(true);
+        } else {
+            tf_commonContainerCBM.setEditable(false);
+            tf_commonContainerQuality.setEditable(false);
+        }
         if (jc_isdangerBulkContainers.isSelected()) {
-                tf_dangerContainerCBM.setEditable(true);
-                tf_dangerContainerQuality.setEditable(true);
-            } else {
-                tf_dangerContainerCBM.setEditable(false);
-                tf_dangerContainerQuality.setEditable(false);
+            tf_dangerContainerCBM.setEditable(true);
+            tf_dangerContainerQuality.setEditable(true);
+        } else {
+            tf_dangerContainerCBM.setEditable(false);
+            tf_dangerContainerQuality.setEditable(false);
         }
     }
 
