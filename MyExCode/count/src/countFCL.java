@@ -1,4 +1,4 @@
-package countfcl;
+package count.src;
 
 import java.awt.*;
 import javax.swing.*;

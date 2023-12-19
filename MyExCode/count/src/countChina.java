@@ -1,4 +1,4 @@
-package countChina.src;
+package count.src;
 
 import java.awt.*;
 import javax.swing.*;
